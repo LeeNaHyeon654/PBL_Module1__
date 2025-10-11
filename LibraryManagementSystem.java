@@ -64,25 +64,25 @@ public class LibraryManagementSystem
         System.out.println("--------------------");
     }
 
-    /**
-     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
-     *
-     * @param  y  메소드의 샘플 파라미터
-     * @return    x 와 y의 합
-     */
-    public LibDB<Book> setBookDB(String bookFile)
-    {
-        return ;
-    }
+    // /**
+     // * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
+     // *
+     // * @param  y  메소드의 샘플 파라미터
+     // * @return    x 와 y의 합
+     // */
+    // public LibDB<Book> setBookDB(String bookFile)
+    // {
+        // return ;
+    // }
 
-    /**
-     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
-     *
-     * @param  y  메소드의 샘플 파라미터
-     * @return    x 와 y의 합
-     */
-    public LibDB<User> setUserDB(String userFile)
-    {
-        return 0;
-    }
+    // /**
+     // * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
+     // *
+     // * @param  y  메소드의 샘플 파라미터
+     // * @return    x 와 y의 합
+     // */
+    // public LibDB<User> setUserDB(String userFile)
+    // {
+        // return 0;
+    // }
 }
