@@ -1,7 +1,7 @@
 import DataBase.*;
 import myClass.*;
 import java.util.*;
-
+import java.io.*;
 /**
  * LibraryManagementSystem 클래스의 설명을 작성하세요.
  *
@@ -32,7 +32,11 @@ public class LibraryManagementSystem
      */
     public void borrowBook(String userID, String bookID)
     {
+        Book findbook = bookDB.findElement(bookID);
+        User finduser = userDB.findElement(userID);
 
+        loanDB.put(finduser,findbook);
+        
     }
 
     /**
@@ -64,25 +68,64 @@ public class LibraryManagementSystem
         System.out.println("--------------------");
     }
 
-    // /**
-     // * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
-     // *
-     // * @param  y  메소드의 샘플 파라미터
-     // * @return    x 와 y의 합
-     // */
-    // public LibDB<Book> setBookDB(String bookFile)
-    // {
-        // return ;
-    // }
+    /**
+     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
+     *
+     * @param  y  메소드의 샘플 파라미터
+     * @return    x 와 y의 합
+     */
+    public LibDB<Book> setBookDB(String bookFile)
+    {
+        try{
+            Scanner scan = new Scanner(new FileReader(bookFile));
+            while(scan.hasNext()){ //토큰분리작업
+                String word = scan.nextLine();
+                StringTokenizer st = new StringTokenizer(word,"/");
+                String bookID = st.nextToken();
+                String title = st.nextToken();
+                String author = st.nextToken();
+                String publisher = st.nextToken();
+                Integer year = Integer.valueOf(st.nextToken());
+                Book book = new Book(bookID, title, author, publisher, year);
+                bookDB.addElement(book);
+            }
 
-    // /**
-     // * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
-     // *
-     // * @param  y  메소드의 샘플 파라미터
-     // * @return    x 와 y의 합
-     // */
-    // public LibDB<User> setUserDB(String userFile)
-    // {
-        // return 0;
-    // }
+        }
+        catch(FileNotFoundException e){//이거 없어도 됨 왜냐 밑에 있는게 다 잡을 수 있음.
+            System.out.println("파일을 열 수 없음");
+        }
+        catch(IOException e){
+            System.out.println("입출력 오류");
+        }
+        return bookDB;
+    }
+
+    /**
+     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
+     *
+     * @param  y  메소드의 샘플 파라미터
+     * @return    x 와 y의 합
+     */
+    public LibDB<User> setUserDB(String userFile)
+    {
+        try{
+        Scanner scan = new Scanner(new FileReader(userFile));
+        while(scan.hasNext()){//토큰분리작업
+            String word = scan.nextLine();
+            StringTokenizer st = new StringTokenizer(word,"/");
+            Integer stID = Integer.valueOf(st.nextToken());
+            String name = st.nextToken();
+            User user = new User(stID, name);
+            userDB.addElement(user);
+        }
+
+        }
+        catch(FileNotFoundException e){//이거 없어도 됨 왜냐 밑에 있는게 다 잡을 수 있음.
+            System.out.println("파일을 열 수 없음");
+        }
+        catch(IOException e){
+            System.out.println("입출력 오류");
+        }
+        return userDB;
+    }
 }

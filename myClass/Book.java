@@ -12,8 +12,8 @@ public class Book extends DB_Element
     private String bookID;
     private String publisher;
     private String title;
-    private int year;
-    public Book(String bookID,String title,String author,String publisher,int year)
+    private Integer year;
+    public Book(String bookID,String title,String author,String publisher,Integer year)
     {
         this.bookID=bookID;
         this.title=title;
