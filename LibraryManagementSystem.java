@@ -36,7 +36,6 @@ public class LibraryManagementSystem
         User finduser = userDB.findElement(userID);
 
         loanDB.put(finduser,findbook);
-        
     }
 
     /**
@@ -56,7 +55,7 @@ public class LibraryManagementSystem
      * @param  y  메소드의 샘플 파라미터
      * @return    x 와 y의 합
      */
-    public static void printLoanList(HashMap<User,Book> loanDB){
+    public void printLoanList(){
         System.out.println("----- 대출 현황 -----");  
         Set<User> user = loanDB.keySet();
         Iterator<User> it = user.iterator();
@@ -77,7 +76,7 @@ public class LibraryManagementSystem
     public LibDB<Book> setBookDB(String bookFile)
     {
         try{
-            Scanner scan = new Scanner(new FileReader(bookFile));
+            Scanner scan = new Scanner(new FileReader(bookFile)); //495p 참고
             while(scan.hasNext()){ //토큰분리작업
                 String word = scan.nextLine();
                 StringTokenizer st = new StringTokenizer(word,"/");
@@ -89,7 +88,6 @@ public class LibraryManagementSystem
                 Book book = new Book(bookID, title, author, publisher, year);
                 bookDB.addElement(book);
             }
-
         }
         catch(FileNotFoundException e){//이거 없어도 됨 왜냐 밑에 있는게 다 잡을 수 있음.
             System.out.println("파일을 열 수 없음");
