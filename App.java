@@ -10,6 +10,23 @@ import java.io.File;
  */
 public class App
 {
+<<<<<<< HEAD
+    public static void main(String[] args){
+        LibraryManagementSystem libMS = new LibraryManagementSystem();
+
+        LibDB<User> userDB = libMS.setUserDB("C:\\Temp\\UserData2025.txt");
+        libMS.printDB(userDB);
+
+        LibDB<Book> bookDB = libMS.setBookDB("C:\\Temp\\BookData2025.txt");
+        libMS.printDB(bookDB);
+
+        libMS.borrowBook("2025320001", "B02");
+        libMS.borrowBook("2024320002", "B03");
+        libMS.borrowBook("2023320003", "B04");
+
+        libMS.printLoanList();
+    }
+=======
    public static void main(String[] args){
        LibraryManagementSystem libMS = new LibraryManagementSystem();
        libMS.setUserDB("C:\\Temp\\UserData2025.txt");
@@ -29,4 +46,5 @@ public class App
        //제 생각에는 hashamap의 출력은 무작위성을 가지고있는 것같은데 궁금해서 문의 드립니다
        libMS.printLoanList();
    }
+>>>>>>> e23f7cf5afaec6ca3b2ac324c7e541ed2af73c40
 }
