@@ -73,28 +73,33 @@ public class LibraryManagementSystem
     public LibDB<Book> setBookDB(String bookFile)
     {
         try{
+
             Scanner scan = new Scanner(new FileReader(bookFile));
             Book book;
             while(scan.hasNext()){
-                String word = scan.nextLine();
-                StringTokenizer st = new StringTokenizer(word,"/");
-                String bookID = st.nextToken();
-                String title = st.nextToken();
-                String author = st.nextToken();
-                String publisher = st.nextToken();
-                int year = Integer.valueOf(st.nextToken());
-                book = new Book(bookID, title, author, publisher, year);
-                //bookDB.addElement(b);//이거가 아마 저장하는것 같음
-            }
-            System.out.println("----- 책 목록 출력 -----");
-            Iterator<Book> it = bookDB.iterator();
-            while(it.hasNext()){
-                Book b = it.next();
-                bookDB.addElement(b);//이거가 아마 저장하는것 같음
-            }
+                Scanner scan = new Scanner(new FileReader(bookFile)); //495p 참고
+                while(scan.hasNext()){ //토큰분리작업
 
-            System.out.println("--------------------");
-            scan.close();
+                    String word = scan.nextLine();
+                    StringTokenizer st = new StringTokenizer(word,"/");
+                    String bookID = st.nextToken();
+                    String title = st.nextToken();
+                    String author = st.nextToken();
+                    String publisher = st.nextToken();
+                    int year = Integer.valueOf(st.nextToken());
+                    book = new Book(bookID, title, author, publisher, year);
+                    //bookDB.addElement(b);//이거가 아마 저장하는것 같음
+                }
+                System.out.println("----- 책 목록 출력 -----");
+                Iterator<Book> it = bookDB.iterator();
+                while(it.hasNext()){
+                    Book b = it.next();
+                    bookDB.addElement(b);//이거가 아마 저장하는것 같음
+                }
+
+                System.out.println("--------------------");
+                scan.close();
+            }
         }
         catch(FileNotFoundException e){
             System.out.println("파일을 열 수 없음");
