@@ -47,6 +47,7 @@ public class LibDB<T extends DB_Element>
         for(T e : db){
             System.out.println(e);
         }
+        System.out.println();
     }
 
 }

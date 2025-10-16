@@ -60,7 +60,7 @@ public class LibraryManagementSystem
             Book b = loanDB.get(u);
             System.out.println(u + " ===> " + b);
         }
-        System.out.println("--------------------");
+        System.out.println("--------------------\n");
     }
 
     /**
@@ -73,33 +73,32 @@ public class LibraryManagementSystem
     public LibDB<Book> setBookDB(String bookFile)
     {
         try{
+            FileReader fi = new FileReader(bookFile);
+            Scanner scan = new Scanner(fi); //495p 참고
+            Vector<Book> bookVector = new Vector<Book>();
 
-            Scanner scan = new Scanner(new FileReader(bookFile));
-            Book book;
             while(scan.hasNext()){
-                Scanner scan = new Scanner(new FileReader(bookFile)); //495p 참고
-                while(scan.hasNext()){ //토큰분리작업
-
-                    String word = scan.nextLine();
-                    StringTokenizer st = new StringTokenizer(word,"/");
-                    String bookID = st.nextToken();
-                    String title = st.nextToken();
-                    String author = st.nextToken();
-                    String publisher = st.nextToken();
-                    int year = Integer.valueOf(st.nextToken());
-                    book = new Book(bookID, title, author, publisher, year);
-                    //bookDB.addElement(b);//이거가 아마 저장하는것 같음
-                }
-                System.out.println("----- 책 목록 출력 -----");
-                Iterator<Book> it = bookDB.iterator();
-                while(it.hasNext()){
-                    Book b = it.next();
-                    bookDB.addElement(b);//이거가 아마 저장하는것 같음
-                }
-
-                System.out.println("--------------------");
-                scan.close();
+                String word = scan.nextLine();
+                
+                StringTokenizer st = new StringTokenizer(word,"/");
+                
+                String bookID = st.nextToken();
+                String title = st.nextToken();
+                String author = st.nextToken();
+                String publisher = st.nextToken();
+                int year = Integer.valueOf(st.nextToken());
+                
+                Book book = new Book(bookID, title, author, publisher, year);
+                bookVector.add(book);
             }
+
+            Iterator<Book> it = bookVector.iterator();
+            while(it.hasNext()){
+                Book b = it.next();
+                bookDB.addElement(b);
+            }         
+            fi.close();
+            scan.close();
         }
         catch(FileNotFoundException e){
             System.out.println("파일을 열 수 없음");
@@ -119,20 +118,27 @@ public class LibraryManagementSystem
     public LibDB<User> setUserDB(String userFile)
     {
         try{
-            Scanner scan = new Scanner(new FileReader(userFile));
+            FileReader fi = new FileReader(userFile);
+            Scanner scan = new Scanner(fi);
+            Vector<User> userVector = new Vector<User>();
+            
             while(scan.hasNext()){
                 String word = scan.nextLine();
+                
                 StringTokenizer st = new StringTokenizer(word,"/");
+                
                 Integer stID = Integer.valueOf(st.nextToken());
                 String name = st.nextToken();
+                
                 User user = new User(stID, name);
-                userDB.addElement(user);
+                userVector.add(user);
             }
-            System.out.println("----- 이용자 목록 출력 -----");
-            for(int i = 0; i<userDB.size(); i++){//여기서 출력문 삭제하고 여기서 리턴해야하는것같음 밑에서 하는게 아니라 아마?
-                return userDB.get(i);
+
+            for(int i = 0; i<userVector.size(); i++){
+                User u = userVector.get(i);
+                userDB.addElement(u);
             }
-            System.out.println("--------------------");
+            fi.close();
             scan.close();
         }
         catch(FileNotFoundException e){
