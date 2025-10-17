@@ -14,7 +14,7 @@ public class LibraryManagementSystem
     LibDB<Book> bookDB;
     HashMap<User,Book> loanDB;
     LibDB<User> userDB;
-    Iterator<Book> it;
+
     /**
      * LibraryManagementSystem 클래스의 객체 생성자
      */
