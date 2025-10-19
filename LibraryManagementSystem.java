@@ -26,7 +26,7 @@ public class LibraryManagementSystem
     }
 
     /**
-     * 이용자ID와 책ID를 매개변수로 받아 대출 정보를 등록하는 메소드
+     * 이용자ID와 책ID를 매개변수로 받아 대출 하는 메소드
      *
      * @param  userID : String, bookID : String
      */
@@ -64,7 +64,7 @@ public class LibraryManagementSystem
     }
 
     /**
-     * 책의 등록정보를 매개변수로 전달 받아 데이터를 읽어서 책 객체 생성 한 후 책DB에 저장하는 메소드
+     * 매개변수로 받은 책 정보를 이용해 객체를 만들고, 이를 DB에 저장하는 메소드
      *
      * @param  bookFile : String
      * @return    책 정보가 저장된 bookDB 리턴
@@ -74,7 +74,7 @@ public class LibraryManagementSystem
     {
         try{
             FileReader fi = new FileReader(bookFile);
-            Scanner scan = new Scanner(fi); //495p 참고
+            Scanner scan = new Scanner(fi);
             Vector<Book> bookVector = new Vector<Book>();
 
             while(scan.hasNext()){
@@ -110,7 +110,7 @@ public class LibraryManagementSystem
     }
 
     /**
-     * 이용자의 등록정보를 매개변수로 전달 받아 데이터를 읽어서 이용자 객체 생성 한 후 이용자DB에 저장하는 메소드
+     * 매개변수로 받은 이용자 정보를 이용해 객체를 만들고, 이를 DB에 저장하는 메소드
      *
      * @param  userFile : String
      * @return    이용자 정보가 저장된 userDB 리턴
