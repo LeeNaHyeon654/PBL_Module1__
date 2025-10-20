@@ -10,7 +10,6 @@ import myClass.*;
 public class LibDB<T extends DB_Element>
 {
     private ArrayList<T> db;
-
     /**
      * LibDB 클래스의 객체 생성자
      */
@@ -20,14 +19,19 @@ public class LibDB<T extends DB_Element>
     }
 
     /**
-     * 데이터베이스에 요소하나를 추가하는 메소드
+     * 데이터베이스에 요소 하나를 추가하는 메소드
+     * 
+     * @param  element : T
      **/
     public void addElement(T element){
         db.add(element);
     }
 
     /**
-     * ID와 일치하는 요소를 데이터베이스에서 검색하여 반환하는 메소드
+     * 데이터베이스에서 ID와 일치하는 객체를 찾아 반환하는 메소드
+     * 
+     * @param   id : String
+     * @return  ID와 일치하는 요소(T), 일치하는 요소가 없으면 null 반환
      **/
     public T findElement(String id){
         Iterator<T> it = db.iterator();

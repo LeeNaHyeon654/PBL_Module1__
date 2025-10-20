@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * 도서관관리시스템 내에서 수행하는 여러 가지 처리작업을 정의해 놓은 클래스
+ * 도서관관리시스템 내에서 수행하는 여러가지 처리 작업을 정의해 놓은 클래스
  *
  * @author (2024320009 이나현, 2024320011 김혜린)
  * @version (2025.10.13)
@@ -17,7 +17,6 @@ public class LibraryManagementSystem
 
     /**
      * LibraryManagementSystem 클래스의 객체 생성자
-     * (3개의 DB를 생성한 후, 각 속성이 참조하도록 하는 역할을 수행)
      */
     public LibraryManagementSystem()
     {
@@ -27,7 +26,7 @@ public class LibraryManagementSystem
     }
 
     /**
-     * 이용자ID와 책ID를 매개변수로 받아 대출 정보를 등록하는 메소드
+     * userID와 bookID를 매개변수로 받아 대출 하는 메소드
      *
      * @param  userID : String, bookID : String
      */
@@ -42,7 +41,7 @@ public class LibraryManagementSystem
     /**
      * 전달받은 데이터베이스에 있는 모든 요소를 출력하는 제네릭한 메소드
      *
-     * @param  db : LibDB<T>
+     * @param   db : LibDB<T>
      */
     public <T extends DB_Element> void printDB(LibDB<T> db)
     {
@@ -50,7 +49,7 @@ public class LibraryManagementSystem
     }
 
     /**
-     * 대출DB에 저장된 정보를 출력 화면에 나와있는 형태로 대출 현황 출력하는 메소드
+     * 대출DB에 저장된 정보를 요구사항의 출력 화면과 같이 대출 현황을 출력하는 메소드
      */
     public void printLoanList(){
         System.out.println("----- 대출 현황 -----");  
@@ -65,17 +64,17 @@ public class LibraryManagementSystem
     }
 
     /**
-     * 책의 등록정보를 매개변수로 전달 받아 데이터를 읽어서 책 객체 생성 한 후 책DB에 저장하는 메소드
+     * 매개변수로 받은 책 정보를 이용해 객체를 만들고, 이를 DB에 저장하는 메소드
      *
-     * @param  bookFile : String
-     * @return    책 정보가 저장된 bookDB 리턴
+     * @param   bookFile : String
+     * @return  책 정보가 저장된 bookDB 리턴
      */
 
     public LibDB<Book> setBookDB(String bookFile)
     {
         try{
             FileReader fi = new FileReader(bookFile);
-            Scanner scan = new Scanner(fi); //495p 참고
+            Scanner scan = new Scanner(fi);
             Vector<Book> bookVector = new Vector<Book>();
 
             while(scan.hasNext()){
@@ -92,12 +91,12 @@ public class LibraryManagementSystem
                 Book book = new Book(bookID, title, author, publisher, year);
                 bookVector.add(book);
             }
+
             Iterator<Book> it = bookVector.iterator();
             while(it.hasNext()){
                 Book b = it.next();
                 bookDB.addElement(b);
             }
-            
             fi.close();
             scan.close();
         }
@@ -112,10 +111,10 @@ public class LibraryManagementSystem
     }
 
     /**
-     * 이용자의 등록정보를 매개변수로 전달 받아 데이터를 읽어서 이용자 객체 생성 한 후 이용자DB에 저장하는 메소드
+     * 매개변수로 받은 이용자 정보를 이용해 객체를 만들고, 이를 DB에 저장하는 메소드
      *
-     * @param  userFile : String
-     * @return    이용자 정보가 저장된 userDB 리턴
+     * @param   userFile : String
+     * @return  이용자 정보가 저장된 userDB 리턴
      */
     public LibDB<User> setUserDB(String userFile)
     {
@@ -126,9 +125,9 @@ public class LibraryManagementSystem
 
             while(scan.hasNext()){
                 String word = scan.nextLine();
-
+                
                 StringTokenizer st = new StringTokenizer(word,"/");
-
+  
                 Integer stID = Integer.valueOf(st.nextToken());
                 String name = st.nextToken();
 
