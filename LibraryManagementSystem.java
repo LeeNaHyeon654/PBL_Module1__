@@ -2,7 +2,7 @@ import DataBase.*;
 import myClass.*;
 import java.util.*;
 import java.io.*;
-import java.lang.*;
+
 /**
  * 도서관관리시스템 내에서 수행하는 여러 가지 처리작업을 정의해 놓은 클래스
  *
@@ -14,9 +14,10 @@ public class LibraryManagementSystem
     LibDB<Book> bookDB;
     HashMap<User,Book> loanDB;
     LibDB<User> userDB;
-    Iterator<Book> it;
+
     /**
      * LibraryManagementSystem 클래스의 객체 생성자
+     * (3개의 DB를 생성한 후, 각 속성이 참조하도록 하는 역할을 수행)
      */
     public LibraryManagementSystem()
     {
@@ -60,7 +61,7 @@ public class LibraryManagementSystem
             Book b = loanDB.get(u);
             System.out.println(u + " ===> " + b);
         }
-        System.out.println("--------------------");
+        System.out.println("--------------------\n");
     }
 
     /**
@@ -73,30 +74,31 @@ public class LibraryManagementSystem
     public LibDB<Book> setBookDB(String bookFile)
     {
         try{
+            FileReader fi = new FileReader(bookFile);
+            Scanner scan = new Scanner(fi); //495p 참고
+            Vector<Book> bookVector = new Vector<Book>();
 
-            Scanner scan = new Scanner(new FileReader(bookFile));
-            Book book;
-
-            while(scan.hasNext()){ //토큰분리작업
-
+            while(scan.hasNext()){
                 String word = scan.nextLine();
+
                 StringTokenizer st = new StringTokenizer(word,"/");
+
                 String bookID = st.nextToken();
                 String title = st.nextToken();
                 String author = st.nextToken();
                 String publisher = st.nextToken();
                 int year = Integer.valueOf(st.nextToken());
-                book = new Book(bookID, title, author, publisher, year);
-                //bookDB.addElement(b);//이거가 아마 저장하는것 같음
+
+                Book book = new Book(bookID, title, author, publisher, year);
+                bookVector.add(book);
             }
-            System.out.println("----- 책 목록 출력 -----");
-            Iterator<Book> it = bookDB.iterator();
+            Iterator<Book> it = bookVector.iterator();
             while(it.hasNext()){
                 Book b = it.next();
-                bookDB.addElement(b);//이거가 아마 저장하는것 같음
+                bookDB.addElement(b);
             }
-
-            System.out.println("--------------------");
+            
+            fi.close();
             scan.close();
         }
 
@@ -118,20 +120,27 @@ public class LibraryManagementSystem
     public LibDB<User> setUserDB(String userFile)
     {
         try{
-            Scanner scan = new Scanner(new FileReader(userFile));
+            FileReader fi = new FileReader(userFile);
+            Scanner scan = new Scanner(fi);
+            Vector<User> userVector = new Vector<User>();
+
             while(scan.hasNext()){
                 String word = scan.nextLine();
+
                 StringTokenizer st = new StringTokenizer(word,"/");
+
                 Integer stID = Integer.valueOf(st.nextToken());
                 String name = st.nextToken();
+
                 User user = new User(stID, name);
-                userDB.addElement(user);
+                userVector.add(user);
             }
-            System.out.println("----- 이용자 목록 출력 -----");
-            for(int i = 0; i<userDB.size(); i++){//여기서 출력문 삭제하고 여기서 리턴해야하는것같음 밑에서 하는게 아니라 아마?
-                return userDB.get(i);
+
+            for(int i = 0; i<userVector.size(); i++){
+                User u = userVector.get(i);
+                userDB.addElement(u);
             }
-            System.out.println("--------------------");
+            fi.close();
             scan.close();
         }
         catch(FileNotFoundException e){

@@ -1,7 +1,7 @@
 import DataBase.*;
 import myClass.*;
 import java.util.*;
-import java.io.File;
+
 /**
  * 도서관관리시스템의 주요 기능을 순차적으로 실행하는 메인 클래스
  *
@@ -14,11 +14,13 @@ public class App
         LibraryManagementSystem libMS = new LibraryManagementSystem();
 
         LibDB<User> userDB = libMS.setUserDB("C:\\Temp\\UserData2025.txt");
+        System.out.println("----- 이용자 목록 출력 -----");
         libMS.printDB(userDB);
 
         LibDB<Book> bookDB = libMS.setBookDB("C:\\Temp\\BookData2025.txt");
+        System.out.println("----- 책 목록 출력 -----");
         libMS.printDB(bookDB);
-
+        
         libMS.borrowBook("2025320001", "B02");
         libMS.borrowBook("2024320002", "B03");
         libMS.borrowBook("2023320003", "B04");
